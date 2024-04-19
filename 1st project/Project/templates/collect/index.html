@@ -1,0 +1,103 @@
+{% extends 'partials/base.html' %}
+{% block title %}Search Page{% endblock %}
+{% load crispy_forms_tags %}
+{% block style %}                                
+<style>::-webkit-scrollbar {
+width: 8px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: #555; 
+} @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+
+body{
+background-color:#eee;
+font-family: "Poppins", sans-serif;
+font-weight: 300;
+}
+
+.height{
+height: 100vh;
+}
+
+.search{
+position: relative;
+box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+}
+
+.search input{
+height: 60px;
+text-indent: 25px;
+border: 2px solid #d6d4d4;
+}
+
+.search input:focus{
+box-shadow: none;
+border: 2px solid blue;
+}
+
+.search .fa-search{
+position: absolute;
+top: 20px;
+left: 16px;
+}
+
+.search button{
+position: absolute;
+top: 5px;
+right: 5px;
+height: 50px;
+width: 110px;
+background: blue;
+}</style>
+{% endblock style %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+  <div class="row height d-flex justify-content-center align-items-center">
+    <div class="col-md-8">
+      <div class="search">
+        <i class="fa fa-search"></i>
+        <form method="POST">
+          {% csrf_token %}
+          {{ form|crispy }}
+        <input type="text" class="form-control" placeholder="Have a question? Ask Now">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
+<script type='text/javascript' src='#'></script>
+<script type='text/javascript' src='#'></script>
+<script type='text/javascript' src='#'></script>
+<script type='text/javascript'>#</script>
+<script type='text/javascript'>var myLink = document.querySelector('a[href="#"]');
+myLink.addEventListener('click', function(e) {
+  e.preventDefault();
+});</script>
+{% else %}
+<div class="row my-4">
+  <div class="col-md-6 offset-md-3">
+    <div class="border p-3 bg-white">
+      <h4>Logout Page</h4>
+      <hr>
+      <div class="alert alert-dark">
+          <h5>Please Login First To View Your Account Information</h5>
+      </div>
+      <a href="{% url 'user:login' %}">Login</a>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock content %}
